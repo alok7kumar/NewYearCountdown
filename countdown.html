@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Count down</title>
+
+        <style>
+            body {
+                background-image: url(./sea.jpg);
+                margin: 0;
+                background-size: 100% 100%;
+                display: flex;
+                justify-content: center; /* center horizontally */
+                align-items: center;     /* center vertically */
+            }
+
+            .center-div {
+                width: 600px;
+                height: 300px;
+            }
+
+            .container, .container2{
+                display: flex;
+                justify-content: center;
+                
+            }
+
+            .container .box, .container2 .box{
+                /* border: 1px solid red; */
+                width: 170px;
+                height: 50px;
+                font-size: 35px;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: rgba(0,0,0,0.09);
+            }
+            h1{
+                text-align: center;
+                font-family: jokerman;
+            }
+                
+                /* background-size: 100% 100%; */
+            
+        </style>
+    </head>
+    <body>
+
+        <div class="center-div">
+
+            <h1>New Year Countdown</h1>
+            <div class="container">
+                <div class="box">Days</div>
+                <div class="box">Hours</div>
+                <div class="box">Minutes</div>
+                <div class="box">Seconds</div>
+            </div>
+            <div class="container2">
+                <div class="box">
+                    <span id="days"></span>
+                </div>
+                <div class="box">
+                    <span id="hours"></span> 
+                </div>
+                <div class="box">
+                    <span id="minutes"></span>
+                </div>
+                <div class="box">
+                    <span id="seconds"></span>
+                </div>
+            </div>
+
+        </div>
+        
+
+        <script>
+            let days = document.getElementById('days')
+            let hours = document.getElementById('hours')
+            let minutes = document.getElementById('minutes')
+            let seconds = document.getElementById('seconds')
+            let currentYear = new Date().getFullYear()
+            //console.log(currentYear) // Date() will display current date and time
+
+            const newYearTime = new Date(`January 1 ${currentYear+1} 00:00:00`)
+
+            // update countdown
+
+            function updateCountdown(){
+                const currentTime = new Date();
+                const diff = newYearTime - currentTime;
+                //console.log(diff) //It will display in miliseconds
+                const d = Math.floor(diff/1000/60/60/24) // It will changes miliseconds into days (1000*60*60*24 = 1 day)
+                // console.log(d)
+                days.innerHTML = d
+                const h = Math.floor(diff/1000/60/60)%24
+                hours.innerHTML = h
+                const m = Math.floor(diff/1000/60)%60
+                minutes.innerHTML = m
+                const s = Math.floor(diff/1000)%60
+                seconds.innerHTML = s
+            }
+            // updateCountdown();
+            setInterval(updateCountdown,1000) //setInterval will call function itself every 1 second(1000)
+        </script>
+    </body>
+</html>
